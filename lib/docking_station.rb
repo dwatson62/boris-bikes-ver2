@@ -5,7 +5,7 @@ class DockingStation
   include BikeContainer
 
   def add_bike(bike)
-    raise 'Station is full' if bikes.length == capacity
+    is_full?
     @bikes << bike
   end
 

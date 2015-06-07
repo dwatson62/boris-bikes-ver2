@@ -15,13 +15,13 @@ describe Van do
       station = DockingStation.new
       station.add_bike(bike1)
       3.times { station.add_bike(Bike.new) }
-      subject.collect(station)
+      subject.collect_broken(station)
       expect(subject.bikes.length).to eq 1
     end
     it 'and reports if there are no broken bikes' do
       station = DockingStation.new
       3.times { station.add_bike(Bike.new) }
-      expect { subject.collect(station) }.to raise_error 'No broken bikes'
+      expect { subject.collect_broken(station) }.to raise_error 'No broken bikes'
     end
   end
 
@@ -33,14 +33,14 @@ describe Van do
         bike.break
         station.add_bike(bike)
       end
-      subject.collect(station)
+      subject.collect_broken(station)
       subject.unload
       expect(subject.bikes).to eq []
     end
     it 'working bikes at the station' do
       3.times { subject.bikes << Bike.new }
       station = DockingStation.new
-      station.load(subject)
+      station.load_from(subject)
       expect(subject.bikes).to eq []
     end
   end
@@ -54,7 +54,7 @@ describe Van do
         garage.bikes << bike
       end
       garage.fix_all
-      subject.load(garage)
+      subject.load_from(garage)
       expect(subject.bikes.length).to eq 3
     end
   end

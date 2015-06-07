@@ -23,7 +23,7 @@ module BikeContainer
     @bikes = []
   end
 
-  def load(container)
+  def load_from(container)
     container.bikes.each do |bike|
       is_full?
       @bikes << bike

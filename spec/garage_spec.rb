@@ -16,7 +16,7 @@ describe Garage do
         bike.break
         van.bikes << bike
       end
-      subject.load(van)
+      subject.load_from(van)
       expect(subject.bikes.length).to eq 3
     end
   end
@@ -38,7 +38,7 @@ describe Garage do
       bike.break
       subject.bikes << bike
       subject.fix_all
-      van.load(subject)
+      van.load_from(subject)
       expect(subject.bikes.length).to eq 0
     end
   end

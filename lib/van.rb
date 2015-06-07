@@ -4,7 +4,7 @@ class Van
 
 include BikeContainer
 
-  def collect(station)
+  def collect_broken(station)
     check_station(station)
     station.bikes.each do |bike|
       if bike.working == false

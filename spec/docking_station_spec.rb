@@ -42,4 +42,16 @@ describe DockingStation do
       expect(bike.working).to be_truthy
     end
   end
+
+  context 'The station reports itself empty' do
+    it 'when there are no bikes available' do
+      expect { subject.release_bike }.to raise_error 'No bikes available'
+    end
+    it 'when there are no working bikes available' do
+      bike = Bike.new
+      bike.break
+      subject.add_bike(bike)
+      expect { subject.release_bike }.to raise_error 'No bikes available'
+    end
+  end
 end

@@ -1,5 +1,3 @@
-require 'byebug'
-
 describe DockingStation do
 
   let(:bike) { double(Bike.new) }

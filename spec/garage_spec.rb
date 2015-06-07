@@ -1,4 +1,8 @@
 describe Garage do
+
+    let(:bike) { Bike.new }
+    let(:van) { Van.new }
+
   context 'Upon creation' do
     it 'is empty' do
       expect(subject.bikes).to eq []
@@ -9,21 +13,16 @@ describe Garage do
   end
 
   context 'can receive' do
-    it 'broken bikes from the van' do
-      van = Van.new
-      3.times do
-        bike = Bike.new
-        bike.break
-        van.bikes << bike
-      end
+    it 'a broken bike from the van' do
+      bike.break
+      van.bikes << bike
       subject.load_from(van)
-      expect(subject.bikes.length).to eq 3
+      expect(subject.bikes.length).to eq 1
     end
   end
 
   context 'can fix' do
     it 'all broken bikes' do
-      bike = Bike.new
       bike.break
       subject.bikes << bike
       subject.fix_all
@@ -33,8 +32,6 @@ describe Garage do
 
   context 'is empty' do
     it 'when garage collects all working bikes' do
-      van = Van.new
-      bike = Bike.new
       bike.break
       subject.bikes << bike
       subject.fix_all

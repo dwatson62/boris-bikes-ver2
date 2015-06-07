@@ -1,4 +1,8 @@
 describe Van do
+
+  let(:bike) { Bike.new }
+  let(:station) { DockingStation.new }
+
   context 'Upon creation' do
     it 'is empty' do
       expect(subject.bikes.length).to eq 0
@@ -10,16 +14,13 @@ describe Van do
 
   context 'Can collect from the stations' do
     it 'only broken bikes' do
-      bike1 = Bike.new
-      bike1.break
-      station = DockingStation.new
-      station.add_bike(bike1)
+      bike.break
+      station.add_bike(bike)
       3.times { station.add_bike(Bike.new) }
       subject.collect_broken(station)
       expect(subject.bikes.length).to eq 1
     end
     it 'and reports if there are no broken bikes' do
-      station = DockingStation.new
       3.times { station.add_bike(Bike.new) }
       expect { subject.collect_broken(station) }.to raise_error 'No broken bikes'
     end
@@ -27,7 +28,6 @@ describe Van do
 
   context 'Can unload' do
     it 'broken bikes at the garage' do
-      station = DockingStation.new
       3.times do
         bike = Bike.new
         bike.break
@@ -39,15 +39,16 @@ describe Van do
     end
     it 'working bikes at the station' do
       3.times { subject.bikes << Bike.new }
-      station = DockingStation.new
       station.load_from(subject)
       expect(subject.bikes).to eq []
     end
   end
 
   context 'Can load working bikes' do
+
+    let(:garage) { Garage.new }
+
     it 'that have been fixed in the garage' do
-      garage = Garage.new
       3.times do
         bike = Bike.new
         bike.break

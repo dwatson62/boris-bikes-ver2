@@ -1,3 +1,5 @@
+require 'load_file'
+
 class Bike
 
 attr_accessor :working

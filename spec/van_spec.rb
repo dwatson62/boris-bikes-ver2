@@ -40,7 +40,7 @@ describe Van do
     it 'working bikes at the station' do
       3.times { subject.bikes << Bike.new }
       station = DockingStation.new
-      station.load_bikes(subject)
+      station.load(subject)
       expect(subject.bikes).to eq []
     end
   end

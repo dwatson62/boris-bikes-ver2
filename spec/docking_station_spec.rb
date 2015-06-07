@@ -54,7 +54,7 @@ describe DockingStation do
 
   context 'The station reports itself empty' do
     it 'when there are no bikes available' do
-      expect { subject.release_bike }.to raise_error 'No bikes available'
+      expect { subject.release_bike }.to raise_error 'DockingStation is empty'
     end
     it 'when there are no working bikes available' do
       bike = Bike.new

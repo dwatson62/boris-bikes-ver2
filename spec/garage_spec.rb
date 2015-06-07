@@ -16,7 +16,7 @@ describe Garage do
         bike.break
         van.bikes << bike
       end
-      subject.receive_bikes(van)
+      subject.load(van)
       expect(subject.bikes.length).to eq 3
     end
   end
@@ -45,7 +45,7 @@ describe Garage do
 
   context 'cannot fix' do
     it 'if the garage is empty' do
-      expect { subject.fix_all }.to raise_error 'No bikes to fix'
+      expect { subject.fix_all }.to raise_error 'Garage is empty'
     end
   end
 end

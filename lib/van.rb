@@ -1,14 +1,8 @@
+require 'load_file'
+
 class Van
 
-  attr_accessor :bikes
-  attr_reader :capacity
-
-  DEFAULT_CAPACITY = 4
-
-  def initialize
-    @bikes = []
-    @capacity = DEFAULT_CAPACITY
-  end
+include BikeContainer
 
   def collect(station)
     check_station(station)
@@ -25,20 +19,6 @@ class Van
       return if bike.working == false
     end
     raise 'No broken bikes'
-  end
-
-  def unload
-    is_empty?
-    @bikes = []
-  end
-
-  def load(garage)
-    garage.bikes.each { |bike| @bikes << bike if bike.working }
-    garage.return_bikes
-  end
-
-  def is_empty?
-    raise 'Van is empty' if @bikes.empty?
   end
 
 end

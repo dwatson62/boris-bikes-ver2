@@ -1,7 +1,4 @@
-require 'docking_station'
-require 'bike'
-require 'van'
-require 'garage'
+require 'load_file'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|

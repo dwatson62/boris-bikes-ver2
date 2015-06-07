@@ -1,26 +1,12 @@
+require 'load_file'
+
 class DockingStation
 
-  attr_accessor :bikes
-  attr_reader :capacity
-
-  DEFAULT_CAPACITY = 4
-
-  def initialize
-    @bikes = []
-    @capacity = DEFAULT_CAPACITY
-  end
+  include BikeContainer
 
   def add_bike(bike)
     raise 'Station is full' if bikes.length == capacity
     @bikes << bike
-  end
-
-  def load_bikes(van)
-    van.bikes.each do |bike|
-      raise 'Station is full' if bikes.length == capacity
-      @bikes << bike
-    end
-    van.unload
   end
 
   def release_bike
@@ -32,10 +18,6 @@ class DockingStation
       end
     end
     raise 'No bikes available'
-  end
-
-  def is_empty?
-    raise 'No bikes available' if bikes.empty?
   end
 
 end

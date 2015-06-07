@@ -3,8 +3,13 @@ require 'bike'
 
 describe DockingStation do
 
-  it 'Is empty upon creation' do
-    expect(subject.bikes).to eq []
+  context 'Upon creation' do
+    it 'is empty' do
+      expect(subject.bikes).to eq []
+    end
+    it 'has capacity of 4' do
+      expect(subject.capacity).to eq 4
+    end
   end
 
   context 'can receive' do
@@ -21,6 +26,13 @@ describe DockingStation do
     end
   end
 
+  context 'cannot receive a bike' do
+    it 'when capacity has been reached' do
+      4.times { subject.add_bike(Bike.new) }
+      expect { subject.add_bike(Bike.new) }.to raise_error 'Station is full'
+    end
+  end
+
   context 'Member of the public accesses the station and it' do
 
     it 'releases a working bike' do
@@ -29,9 +41,9 @@ describe DockingStation do
       expect(bike.working).to be_truthy
     end
     it 'releases one working bike at a time' do
-      5.times { subject.add_bike(Bike.new) }
+      4.times { subject.add_bike(Bike.new) }
       subject.release_bike
-      expect(subject.bikes.length).to eq 4
+      expect(subject.bikes.length).to eq 3
     end
     it 'does not release the broken bike' do
       subject.add_bike(Bike.new)

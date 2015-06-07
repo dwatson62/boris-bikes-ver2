@@ -1,6 +1,3 @@
-require 'docking_station'
-require 'bike'
-
 describe DockingStation do
 
   context 'Upon creation' do

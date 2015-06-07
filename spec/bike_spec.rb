@@ -1,5 +1,3 @@
-require 'bike'
-
 describe Bike do
   context 'On creation' do
     it 'Bike is working' do

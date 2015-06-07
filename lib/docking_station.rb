@@ -15,6 +15,14 @@ class DockingStation
     @bikes << bike
   end
 
+  def load_bikes(van)
+    van.bikes.each do |bike|
+      raise 'Station is full' if bikes.length == capacity
+      @bikes << bike
+    end
+    van.unload
+  end
+
   def release_bike
     is_empty?
     bikes.each do |bike|
